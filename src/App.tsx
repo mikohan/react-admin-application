@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import Navbar from './components/Navbar';
+import Menu from './components/Menu';
+import Dashboard from './secure/components/Dashboard';
+import Users from './secure/components/Users';
+import Page_404 from './components/Page_404';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<React.Fragment>
+			<BrowserRouter>
+				<Navbar />
+
+				<div className="container-fluid">
+					<div className="row">
+						<Menu />
+
+						<main
+							role="main"
+							className="col-md-9 ml-sm-auto col-lg-10 px-md-4"
+						>
+							<Switch>
+								<Route exact path="/users" component={Users} />
+								<Route exact path="/" component={Dashboard} />
+								<Route component={Page_404} />
+							</Switch>
+						</main>
+					</div>
+				</div>
+			</BrowserRouter>
+		</React.Fragment>
+	);
 }
 
 export default App;
